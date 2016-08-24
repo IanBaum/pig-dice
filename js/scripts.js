@@ -4,19 +4,34 @@ var Player = function() {
   this.active = false;
 }
 
+Player.prototype.switch = function(){
+  if(this.active === false){
+    this.active = true;
+  }else{
+    this.active = false;
+  }
+}
+
 var Dice = function() {
   this.side = 1;
   this.total = 0;
 }
 
-Dice.prototype.roll = function(){
+Dice.prototype.roll = function(playerOne,playerTwo){
   this.side = Math.ceil(Math.random()*6);
   if (this.side === 1){
     this.total = 0;
+    playerOne.switch();
+    playerTwo.switch();
+    $("#playerOneTurn").toggle();
+    $("#playerTwoTurn").toggle();
   } else {
     this.total += this.side;
   }
+  console.log("player1 = " + playerOne.active);
+  console.log("player2 = " + playerTwo.active);
   $("#possiblePoints").text(this.total);
+  return this.side;
 }
 
 //user logic
@@ -34,7 +49,7 @@ $(document).ready(function(){
   });
 
   $("#diceRoll").click(function(){
-    dice.roll();
+    dice.roll(playerOne,playerTwo);
     $("#currentRoll").text(dice.side);
   });
 
