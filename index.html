@@ -12,6 +12,7 @@
   <body>
     <div class="container">
       <h1>Pig Dice</h1>
+      
       <div class="row pigRules">
         <h3>Rules:</h3>
         <ul>
@@ -20,9 +21,13 @@
           <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
           <button id="onePlayer" class="btn btn-primary">One Player</button>
           <button id="twoPlayer" class="btn btn-success">Two Player</button>
-
+          <div id="difficulty">
+            <button id="aiEasy" class="btn btn-success">Easy Mode!</button>
+            <button id="aiHard" class="btn btn-danger">Hard Mode!</button>
+          </div>
         </ul>
       </div>
+
       <div class="row pigDice">
         <div class="col-sm-2">
           <h1>Player 1</h1>
@@ -43,6 +48,7 @@
           <h2 id="playerTwoTurn">Your Turn</h2>
         </div>
       </div>
+
     </div>
   </body>
 </html>
