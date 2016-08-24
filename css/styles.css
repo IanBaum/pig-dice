@@ -2,10 +2,17 @@ body{
   text-align: center;
 }
 
+.pigDice{
+  display:none;
+}
+
 #currentRoll{
   font-size: 10em;
 }
 
 #pointPool{
   font-size: 2.5em;
+}
+ul{
+  list-style: none;
 }

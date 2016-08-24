@@ -11,7 +11,19 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
+      <h1>Pig Dice</h1>
+      <div class="row pigRules">
+        <h3>Rules:</h3>
+        <ul>
+          <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
+          <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
+          <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
+          <button id="onePlayer" class="btn btn-primary">One Player</button>
+          <button id="twoPlayer" class="btn btn-success">Two Player</button>
+
+        </ul>
+      </div>
+      <div class="row pigDice">
         <div class="col-sm-2">
           <h1>Player 1</h1>
           <h2>Score:</h2>
@@ -19,11 +31,10 @@
           <h2 id="playerOneTurn">Your Turn</h2>
         </div>
         <div class="col-sm-8">
-          <h1>Pig Dice</h1>
           <div id="currentRoll">1</div>
           <div id="pointPool">Possible Points: <span id="possiblePoints">0</span></div>
-          <button class="btn btn-primary">Roll the Die!</button>
-          <button class="btn btn-danger">Hold turn</button>
+          <button id="diceRoll" class="btn btn-primary">Roll the Die!</button>
+          <button id="diceHold" class="btn btn-danger">Hold turn</button>
         </div>
         <div class="col-sm-2">
           <h1>Player 2</h2>
