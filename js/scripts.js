@@ -1,6 +1,7 @@
 //business logic
 var Player = function() {
   this.score = 0;
+  this.active = false;
 }
 
 var Dice = function() {
@@ -9,15 +10,23 @@ var Dice = function() {
 }
 
 Dice.prototype.roll = function(){
-  return Math.ceil(Math.random()*6);
+  this.side = Math.ceil(Math.random()*6);
+  if (this.side === 1){
+    this.total = 0;
+  } else {
+    this.total += this.side;
+  }
+  $("#possiblePoints").text(this.total);
 }
-
-
 
 //user logic
 
 $(document).ready(function(){
   var dice = new Dice();
+  var playerOne = new Player();
+  playerOne.active = true;
+  var playerTwo = new Player();
+
 
   $("#twoPlayer").click(function(){
     $(".pigRules").hide();
@@ -25,7 +34,8 @@ $(document).ready(function(){
   });
 
   $("#diceRoll").click(function(){
-    $("#currentRoll").text(dice.roll());
+    dice.roll();
+    $("#currentRoll").text(dice.side);
   });
 
 });
