@@ -44,8 +44,6 @@ Dice.prototype.roll = function(playerOne,playerTwo){
   }else{
     this.total += this.side;
   }
-  console.log("player1 = " + playerOne.active);
-  console.log("player2 = " + playerTwo.active);
   $("#possiblePoints").text(this.total);
   $("#currentRoll").text(this.side);
   return this.side;
@@ -59,13 +57,6 @@ Dice.prototype.hold = function(playerOne,playerTwo){
     playerTwo.score += this.total;
     $("#playerTwoScore").text(playerTwo.score);
   }
-  this.total = 0;
-  $("#possiblePoints").text(this.total);
-  playerOne.switch();
-  playerTwo.switch();
-  $("#playerOneTurn").toggle();
-  $("#playerTwoTurn").toggle();
-
   if (playerOne.score >= 100){
     alert("Player One Wins!");
     location.reload(true);
@@ -73,6 +64,14 @@ Dice.prototype.hold = function(playerOne,playerTwo){
     alert("Player Two Wins!");
     location.reload(true);
   }
+  this.total = 0;
+  $("#possiblePoints").text(this.total);
+  playerOne.switch();
+  playerTwo.switch();
+  $("#playerOneTurn").toggle();
+  $("#playerTwoTurn").toggle();
+
+
 }
 
 Dice.prototype.easyAI = function(playerOne,playerTwo){
@@ -87,16 +86,19 @@ Dice.prototype.easyAI = function(playerOne,playerTwo){
 
 Dice.prototype.hardAI = function(playerOne,playerTwo){
   var numberOfRolls = 1;
-  var differanceArray = [6,12,18,24,30,36,42,48]
-  var differanceRolls = [1,2,3,4,5,6,7,8]
+  var differanceArray = [0,6,12,18,24,30,36,42,48]
+  var negativeArray = [-6,-12,-18,-24,-30,-36,-42,-48]
+  var differanceRolls = [1,2,3,4,5,6,7,8,9]
 
   this.roll(playerOne,playerTwo);
+  console.log(this.side);
   for(i=0;i<numberOfRolls;i++){
-    var differance = playerTwo.score + this.total - playerOne.score
-    if(this.side != 1){
+    var differance = Math.abs(playerTwo.score - playerOne.score);
+    if(this.side != 1 && playerTwo.score + this.total < 100){
       this.roll(playerOne,playerTwo);
+      console.log(this.side);
       for(j=0;j<differanceArray.length;j++){
-        if(differance <= differanceArray[j]){
+        if(differance >= differanceArray[j]){
           numberOfRolls = differanceRolls[j];
         }
       }
@@ -104,6 +106,7 @@ Dice.prototype.hardAI = function(playerOne,playerTwo){
   }
   if(this.side != 1){
     this.hold(playerOne,playerTwo);
+    console.log(" ");
   }
 }
 
