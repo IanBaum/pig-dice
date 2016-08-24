@@ -1,0 +1,11 @@
+body{
+  text-align: center;
+}
+
+#currentRoll{
+  font-size: 10em;
+}
+
+#pointPool{
+  font-size: 2.5em;
+}
