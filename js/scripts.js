@@ -38,6 +38,8 @@ Dice.prototype.roll = function(playerOne,playerTwo){
     playerTwo.switch();
     $("#playerOneTurn").toggle();
     $("#playerTwoTurn").toggle();
+    $("#diceRoll").toggle();
+    $("#diceHold").toggle();
     // alert("you rolled a 1, computer's turn");
     if(playerTwo.difficulty === "easy"){
       this.easyAI(playerOne,playerTwo);
@@ -51,13 +53,14 @@ Dice.prototype.roll = function(playerOne,playerTwo){
     playerTwo.switch();
     $("#playerOneTurn").toggle();
     $("#playerTwoTurn").toggle();
+    $("#diceRoll").toggle();
+    $("#diceHold").toggle();
   }else{
     this.total += this.side;
   }
   $("#possiblePoints").text(this.total);
   $("#currentRoll").text("");
   $("#currentRoll").append("<img src='" + diceSides[this.side -1] + "'>");
-  // $(".priorRolls").append("<li>" + this.side + "</li>");
   return this.side;
 }
 
@@ -82,6 +85,8 @@ Dice.prototype.hold = function(playerOne,playerTwo){
   playerTwo.switch();
   $("#playerOneTurn").toggle();
   $("#playerTwoTurn").toggle();
+  $("#diceRoll").toggle();
+  $("#diceHold").toggle();
 }
 
 // Dice.prototype.slowRoll = function(playerOne,playerTwo) {
@@ -91,8 +96,6 @@ Dice.prototype.hold = function(playerOne,playerTwo){
 Dice.prototype.easyAI = function(playerOne,playerTwo){
 
   setTimeout(function(){
-    $("#diceRoll").hide();
-    $("#diceHold").hide();
     this.roll(playerOne,playerTwo);
     console.log(this.side);
     if(this.side != 1){
@@ -102,15 +105,11 @@ Dice.prototype.easyAI = function(playerOne,playerTwo){
         if(this.side != 1){
           setTimeout(function(){
             this.hold(playerOne,playerTwo);
-            $("#diceRoll").show();
-            $("#diceHold").show();
           }.bind(this), 500);
         }
       }.bind(this), 500);
     }
-    else{
-      $("#diceRoll").show();
-      $("#diceHold").show();
+    else if (this.side === 1){
     }
   }.bind(this), 500);
 }
