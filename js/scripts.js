@@ -40,7 +40,7 @@ Dice.prototype.roll = function(playerOne,playerTwo){
     $("#playerTwoTurn").toggle();
     $("#diceRoll").toggle();
     $("#diceHold").toggle();
-    // alert("you rolled a 1, computer's turn");
+
     if(playerTwo.difficulty === "easy"){
       this.easyAI(playerOne,playerTwo);
     }else if(playerTwo.difficulty === "hard"){
@@ -89,10 +89,6 @@ Dice.prototype.hold = function(playerOne,playerTwo){
   $("#diceHold").toggle();
 }
 
-// Dice.prototype.slowRoll = function(playerOne,playerTwo) {
-//   setTimeout(function(){this.roll();}.bind(this), 2000);
-// }
-
 Dice.prototype.easyAI = function(playerOne,playerTwo){
 
   setTimeout(function(){
@@ -109,8 +105,6 @@ Dice.prototype.easyAI = function(playerOne,playerTwo){
         }
       }.bind(this), 500);
     }
-    else if (this.side === 1){
-    }
   }.bind(this), 500);
 }
 
@@ -119,25 +113,26 @@ Dice.prototype.hardAI = function(playerOne,playerTwo){
   var differanceArray = [0,6,12,18,24,30,36,42,48]
   var differanceRolls = [1,2,3,4,5,6,7,8,9]
 
-  this.roll(playerOne,playerTwo);
-  console.log(this.side);
-  for(i=0;i<numberOfRolls;i++){
-    var differance = Math.abs(playerTwo.score - playerOne.score);
-    if(this.side != 1 && playerTwo.score + this.total < 100){
-      this.roll(playerOne,playerTwo);
-      console.log(this.side);
+  setTimeout(function(){
+    this.roll(playerOne,playerTwo);
+    console.log(this.side);
+    for(i=0;i<numberOfRolls;i++){
+      var differance = Math.abs(playerTwo.score - playerOne.score);
+      if(this.side != 1 && playerTwo.score + this.total < 100){
+        this.roll(playerOne,playerTwo);
+        console.log(this.side);
 
-      for(j=0;j<differanceArray.length;j++){
-        if(differance >= differanceArray[j]){
-          numberOfRolls = differanceRolls[j];
+        for(j=0;j<differanceArray.length;j++){
+          if(differance >= differanceArray[j]){
+            numberOfRolls = differanceRolls[j];
+          }
         }
       }
     }
-  }
-  if(this.side != 1){
-    this.hold(playerOne,playerTwo);
-    console.log(" ");
-  }
+    if(this.side != 1){
+      this.hold(playerOne,playerTwo);
+    }
+  }.bind(this), 1000);
 }
 
 //user logic
