@@ -12,7 +12,7 @@
   <body>
     <div class="container">
       <h1>Pig Dice</h1>
-      
+
       <div class="row pigRules">
         <h3>Rules:</h3>
         <ul>
@@ -29,23 +29,25 @@
       </div>
 
       <div class="row pigDice">
-        <div class="col-sm-2">
-          <h1>Player 1</h1>
-          <h2>Score:</h2>
+        <div class="col-sm-3">
+          <h2>Player 1</h2>
+          <h3>Score:</h3>
           <h2 id="playerOneScore">0</h2>
-          <h2 id="playerOneTurn">Your Turn</h2>
+          <div id="playerOneTurn">Your Turn</div>
+            <ul class="priorRolls"></ul>
         </div>
-        <div class="col-sm-8">
-          <div id="currentRoll">1</div>
+        <div class="col-sm-6">
+          <div id="currentRoll"><img src='img/cowboy.jpg'></div>
           <div id="pointPool">Possible Points: <span id="possiblePoints">0</span></div>
           <button id="diceRoll" class="btn btn-primary">Roll the Die!</button>
           <button id="diceHold" class="btn btn-danger">Hold turn</button>
         </div>
-        <div class="col-sm-2">
-          <h1>Player 2</h2>
-          <h2>Score:</h2>
+        <div class="col-sm-3">
+          <h2>Player 2</h2>
+          <h3>Score:</h3>
           <h2 id="playerTwoScore">0</h2>
-          <h2 id="playerTwoTurn">Your Turn</h2>
+          <div id="playerTwoTurn">Your Turn</div>
+            <ul class="priorRolls"></ul>
         </div>
       </div>
 

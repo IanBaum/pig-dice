@@ -1,9 +1,19 @@
 //business logic
+var diceSides = ["img/one.png", "img/two.png", "img/three.png", "img/four.png", "img/five.png", "img/six.png"]
+
+
 var Player = function() {
   this.score = 0;
   this.active = false;
   this.computer = false;
   this.difficulty;
+}
+
+var playerSwitch = function(playerOne,playerTwo) {
+  playerOne.switch();
+  playerTwo.switch();
+  $("#playerOneTurn").toggle();
+  $("#playerTwoTurn").toggle();
 }
 
 Player.prototype.switch = function(){
@@ -19,11 +29,16 @@ var Dice = function() {
   this.total = 0;
 }
 
+Dice.prototype.slowRoll = function() {
+  window.setTimeout(this.roll, 2000);
+};
+
 Dice.prototype.roll = function(playerOne,playerTwo){
   this.side = Math.ceil(Math.random()*6);
 
   if(this.side === 1 && playerOne.active === true && playerTwo.computer === true) {
     this.total = 0;
+    // $(".priorRolls").append("<li>" + this.side + "</li>");
     playerOne.switch();
     playerTwo.switch();
     $("#playerOneTurn").toggle();
@@ -45,8 +60,11 @@ Dice.prototype.roll = function(playerOne,playerTwo){
     this.total += this.side;
   }
   $("#possiblePoints").text(this.total);
-  $("#currentRoll").text(this.side);
+  $("#currentRoll").text("");
+  $("#currentRoll").append("<img src='" + diceSides[this.side -1] + "'>");
+  // $(".priorRolls").append("<li>" + this.side + "</li>");
   return this.side;
+
 }
 
 Dice.prototype.hold = function(playerOne,playerTwo){
@@ -66,12 +84,7 @@ Dice.prototype.hold = function(playerOne,playerTwo){
   }
   this.total = 0;
   $("#possiblePoints").text(this.total);
-  playerOne.switch();
-  playerTwo.switch();
-  $("#playerOneTurn").toggle();
-  $("#playerTwoTurn").toggle();
-
-
+  playerSwitch(playerOne,playerTwo);
 }
 
 Dice.prototype.easyAI = function(playerOne,playerTwo){
@@ -87,7 +100,6 @@ Dice.prototype.easyAI = function(playerOne,playerTwo){
 Dice.prototype.hardAI = function(playerOne,playerTwo){
   var numberOfRolls = 1;
   var differanceArray = [0,6,12,18,24,30,36,42,48]
-  var negativeArray = [-6,-12,-18,-24,-30,-36,-42,-48]
   var differanceRolls = [1,2,3,4,5,6,7,8,9]
 
   this.roll(playerOne,playerTwo);
@@ -97,6 +109,7 @@ Dice.prototype.hardAI = function(playerOne,playerTwo){
     if(this.side != 1 && playerTwo.score + this.total < 100){
       this.roll(playerOne,playerTwo);
       console.log(this.side);
+
       for(j=0;j<differanceArray.length;j++){
         if(differance >= differanceArray[j]){
           numberOfRolls = differanceRolls[j];
@@ -131,17 +144,16 @@ $(document).ready(function(){
     playerTwo.difficulty = "easy";
     $(".pigRules").hide();
     $(".pigDice").show();
-  })
+  });
 
   $("#aiHard").click(function(){
     playerTwo.computer = true;
     playerTwo.difficulty = "hard";
     $(".pigRules").hide();
     $(".pigDice").show();
-  })
+  });
 
   $("#twoPlayer").click(function(){
-
     $(".pigRules").hide();
     $(".pigDice").show();
   });
@@ -155,8 +167,8 @@ $(document).ready(function(){
     if(playerTwo.computer === true && playerTwo.difficulty === "easy"){
       dice.easyAI(playerOne,playerTwo);
     }
-    if(playerTwo.computer === true && playerTwo.difficulty === "hard"){
+    else if(playerTwo.computer === true && playerTwo.difficulty === "hard"){
       dice.hardAI(playerOne,playerTwo);
     }
-  })
+  });
 });

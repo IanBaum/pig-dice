@@ -2,26 +2,44 @@ body{
   text-align: center;
 }
 
-.pigDice{
-  display:none;
-}
-
-#currentRoll{
-  font-size: 10em;
-}
-
 #pointPool{
   font-size: 2.5em;
 }
 
-ul{
+#playerTwoTurn, #difficulty, .pigDice{
+  display:none;
+}
+
+#playerOneTurn, #playerTwoTurn {
+  font-size: 2em;
+}
+
+#onePlayer, #twoPlayer, #difficulty, #diceRoll, #diceHold {
+margin-top: 25px;
+}
+
+#currentRoll img {
+  width: 313px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+h1 {
+  color: #cc0000;
+  font-size: 7em;
+}
+
+h2 {
+  color: #cc0000;
+  font-size: 3em;
+}
+
+h3 {
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+ul {
+  font-size: 1.25em;
   list-style: none;
-}
-
-#playerTwoTurn{
-  display:none;
-}
-
-#difficulty{
-  display:none;
 }
